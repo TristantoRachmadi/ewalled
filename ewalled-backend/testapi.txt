@@ -1,0 +1,110 @@
+// 1. endpoint beserta method
+// 2. request 
+// 3. response
+
+// 1. Page register 
+endpoint: POST/ register
+
+body request:
+{
+    "nama_lengkap": "Nama Lengkap Pengguna",
+    "email": "email@example.com",
+    "password": "password123",
+    "no_hp": "081234567890"
+  }
+
+response sukses:
+{
+    "message": "Pendaftaran berhasil",
+    "user_id": 123
+  }
+
+response gagal:
+{
+    "error": "Email sudah terdaftar"
+  } or 
+   {
+        "error": "Format email tidak valid"
+      } or 
+        {
+            "error": "Nomor HP tidak valid"
+        }
+
+// 2. Page login
+endpoint: POST/ login
+
+body request: {
+    "email": "email@example.com",
+    "password": "password123"
+  }
+
+body response sukses: {
+    "message": "Login berhasil",
+    "access_token": "token_akses_anda"
+  }
+
+body response gagal: {
+    "error": "Email atau password salah"
+  }
+
+// 3. Page Profile
+endpoint: GET /profile
+
+body request: {
+    GET/home?username ="user"
+}
+
+body response sukses: {
+  {
+    "user": {
+      "nama": "Chelsea Immanuela",
+      "account_no": "100899",
+      "balance": 10000000
+    },
+    "transactions": [
+      {
+        "date_time": "2022-06-30T20:10:00Z",
+        "type": "DEBIT",
+        "from_to": "310001001",
+        "description": "Fore Coffee",
+        "amount": -75000
+      },
+      {
+        "date_time": "2022-06-30T20:10:00Z",
+        "type": "CREDIT",
+        "from_to": "1001",
+        "description": "Topup from Bank Transfer",
+        "amount": 1000000
+      },
+      // ... (8 transaksi lainnya)
+    ]
+  }
+
+  body response gagal: {
+    {
+      "error": "Token tidak valid"}
+    {
+      "error": "Pengguna tidak ditemukan"
+    }
+
+// 4. Page transfer
+endpoint: POST /transactions/transfer
+
+body request: {
+    "recipient_account_no": "900782139",
+    "amount": 150000,
+    "notes": "Transfer pembayaran makan siang"
+  }
+
+body response sukses : {
+  "message": "Transfer berhasil",
+  "transaction_id": 123
+}
+
+body response gagal: {
+  "error": "Saldo tidak mencukupi"
+} or {
+  "error": "Penerima tidak ditemukan"
+}
+
+
